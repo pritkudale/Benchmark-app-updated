@@ -80,32 +80,6 @@ app.layout = html.Div(className='app-container', children=[
                 value='Total Cost',
                 clearable=False
             ),
-        ]),
-        
-        html.Div(className='control-item', children=[
-            html.Label("Label Font Size:"),
-            dcc.Slider(
-                id='font-size-slider',
-                min=8,
-                max=20,
-                step=1,
-                value=9,
-                marks={8: '8', 12: '12', 16: '16', 20: '20'},
-                tooltip={"placement": "bottom", "always_visible": True}
-            ),
-        ]),
-        
-        html.Div(className='control-item', children=[
-            html.Label("Graph Height:"),
-            dcc.Slider(
-                id='height-slider',
-                min=400,
-                max=1000,
-                step=50,
-                value=650,
-                marks={400: '400', 600: '600', 800: '800', 1000: '1000'},
-                tooltip={"placement": "bottom", "always_visible": True}
-            ),
         ])
     ]),
     
@@ -117,11 +91,9 @@ app.layout = html.Div(className='app-container', children=[
 @app.callback(
     Output('scatter-plot', 'figure'),
     [Input('benchmark-dropdown', 'value'),
-     Input('cost-dropdown', 'value'),
-     Input('font-size-slider', 'value'),
-     Input('height-slider', 'value')]
+     Input('cost-dropdown', 'value')]
 )
-def update_graph(selected_benchmark, selected_cost, font_size, graph_height):
+def update_graph(selected_benchmark, selected_cost):
     # Filter out rows with missing values for the selected columns
     # Also ensure benchmark scores are numeric
     temp_df = df.copy()
@@ -141,7 +113,7 @@ def update_graph(selected_benchmark, selected_cost, font_size, graph_height):
             font=dict(family="Poppins", size=14, color="#4b5563"),
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='#ffffff',
-            height=graph_height, # Use dynamic graph height
+            height=650, # Match graph height
             xaxis={"visible": False},
             yaxis={"visible": False},
             annotations=[
@@ -247,32 +219,19 @@ def update_graph(selected_benchmark, selected_cost, font_size, graph_height):
         margin=dict(l=80, r=40, t=120, b=80), # Increased top margin for legend and title
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='#ffffff', # Clean white plot area
-        height=graph_height # Dynamic graph height
+        height=650 # Taller graph
     )
     
     fig.update_traces(
         textposition='top center',
-        textfont=dict(family="Poppins", size=font_size, color="#555555"), # Dynamic font size
+        textfont=dict(family="Poppins", size=9, color="#555555"), # Slightly darker text
         marker=dict(size=11, opacity=0.85, line=dict(width=1, color='DarkSlateGrey')),
         # selector=dict(type='scatter') # Ensure it applies to scatter traces
     )
     
-    # Add Vizuara logo at bottom right
-    fig.add_layout_image(
-        dict(
-            source=app.get_asset_url("logo.png"),
-            xref="paper",
-            yref="paper",
-            x=1,
-            y=0,
-            sizex=0.18,
-            sizey=0.18,
-            xanchor="right",
-            yanchor="bottom",
-            opacity=0.7,
-            layer="above"
-        )
-    )
+    # --- BEST VALUE ANNOTATION REMOVED ---
+    # The block of code for calculating and adding the best value annotation
+    # and highlighting has been removed from here.
     
     return fig
 

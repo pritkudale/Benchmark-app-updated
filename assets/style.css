@@ -66,6 +66,87 @@ body {
     color: #34495e; /* Slate grey */
 }
 
+.chart-controls-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    align-items: flex-start;
+}
+
+.chart-controls-container .control-item {
+    flex: 1;
+}
+
+.screenshot-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.screenshot-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+    margin-top: 5px;
+}
+
+.screenshot-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+.screenshot-btn:active {
+    transform: translateY(0);
+}
+
+.screenshot-status {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #374151;
+    text-align: left;
+    width: 100%;
+}
+
+/* Slider styling */
+.rc-slider {
+    margin: 15px 10px 10px 10px;
+}
+
+.rc-slider-track {
+    background-color: #667eea;
+}
+
+.rc-slider-handle {
+    border-color: #667eea;
+}
+
+.rc-slider-handle:hover,
+.rc-slider-handle:active,
+.rc-slider-handle:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 0 5px rgba(102, 126, 234, 0.2);
+}
+
+.rc-slider-mark-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: #6b7280;
+}
+
 /* Ensure Poppins font in dropdown options */
 .Select-menu-outer, .VirtualizedSelectOption {
     font-family: 'Poppins', sans-serif !important;
